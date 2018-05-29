@@ -1,5 +1,5 @@
 #!/bin/bash
-MYSELF=$0
+MYSELF=$(basename "$0")
 DOMAIN=$1
 CMS=$2
 ARGC=$#
