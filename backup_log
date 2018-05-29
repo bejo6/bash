@@ -1,0 +1,44 @@
+#!/bin/bash
+# vi /etc/cron.daily/compress_log;chmod +x /etc/cron.daily/compress_log
+
+fdate=$(date +%Y-%m-%d)
+mdate=$(date +%Y-%m)
+debug=1
+
+function fecho
+{
+  if [ "$debug" -eq 1 ];then
+     echo "$1"
+  fi
+}
+function fcomp
+{
+  xtar=$(command -v tar)
+  xzip=$(command -v zip)
+  if [ ! -z "$xtar" ];then
+     xtar -zcfu "${mdate}.gz" "$1" --remove-files
+  elif [ ! -z "$xzip" ];then
+     xzip -rm -9 "${mdate}.zip" "$1"
+  fi
+}
+for dir in /var/log/php-fpm /var/log/httpd /var/log/nginx
+do
+   fecho "Change dir to $dir"
+   cd "$dir" || continue
+   for f in $(find "$dir" -type f -name "*_log" -o -name "*.log" | awk '{$1=$1};1')
+   do
+     fecho "Filename : $f"
+     fsize=$(stat -c %s "$f" | awk '{$1=$1};1')
+     MBsize=$(stat -c %s "$f" | awk '{$1=$1/(1024**2)};1' | xargs printf %.2f)
+     fecho "Filesize : $MBsize MB"
+     if [ "$fsize" -gt 50000000 ];then
+	     newname="${f}-${fdate}"
+         fecho "File $f greater than 50MB, Try to backup"
+         mv "$f" "$newname"
+		 fcomp "$newname"
+         touch "$f";
+     fi
+   done
+done
+
+systemctl restart php-fpm.service nginx.service httpd.service
