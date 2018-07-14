@@ -32,11 +32,11 @@ do
      MBsize=$(stat -c %s "$f" | awk '{$1=$1/(1024**2)};1' | xargs printf %.2f)
      fecho "Filesize : $MBsize MB"
      if [ "$fsize" -gt 50000000 ];then
-	     newname="${f}-${fdate}"
-         fecho "File $f greater than 50MB, Try to backup"
-         mv "$f" "$newname"
-		 fcomp "$newname"
-         touch "$f";
+        newname="${f}-${fdate}"
+        fecho "File $f greater than 50MB, Try to backup"
+        mv "$f" "$newname"
+        fcomp "$newname"
+        touch "$f";
      fi
    done
 done
