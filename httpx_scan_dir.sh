@@ -4,6 +4,10 @@
 # to avoid overwriting httpx output
 ##############################################
 
+# try include escape quotes for HTTPX_ARGS if use double quotes
+# ex: "\"upload|cmd\""
+#     "'upload|cmd'"
+
 HTTPX_ARGS_PATH="YOUR_TARGET_PATH"
 HTTPX_ARGS_REGEX="YOUR_CUSTOM_REGEX"
 TARGET_DIR="targets"
