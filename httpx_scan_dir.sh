@@ -4,7 +4,7 @@
 # to avoid overwriting httpx output
 ##############################################
 
-# try include escape quotes for HTTPX_ARGS if value contains space and use double quotes
+# try including escaping quotes for the value "HTTPX_ARGS" if it contains spaces and uses double quotes
 # ex: "\"uname -a|\"" or
 #     "'uname -a'"
 
