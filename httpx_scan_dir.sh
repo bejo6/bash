@@ -5,7 +5,7 @@
 ##############################################
 
 # try include escape quotes for HTTPX_ARGS if use double quotes
-# ex: "\"upload|cmd\""
+# ex: "\"upload|cmd\"" or
 #     "'upload|cmd'"
 
 HTTPX_ARGS_PATH="YOUR_TARGET_PATH"
