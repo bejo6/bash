@@ -4,9 +4,9 @@
 # to avoid overwriting httpx output
 ##############################################
 
-# try include escape quotes for HTTPX_ARGS if use double quotes
-# ex: "\"upload|cmd\"" or
-#     "'upload|cmd'"
+# try include escape quotes for HTTPX_ARGS if value contains space and use double quotes
+# ex: "\"uname -a|\"" or
+#     "'uname -a'"
 
 HTTPX_ARGS_PATH="YOUR_TARGET_PATH"
 HTTPX_ARGS_REGEX="YOUR_CUSTOM_REGEX"
